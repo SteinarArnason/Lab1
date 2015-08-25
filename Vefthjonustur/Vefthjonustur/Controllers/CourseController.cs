@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http.Description;
 using Vefthjonustur.Models;
+using System.Diagnostics;
 
 namespace Lab1.Controllers
 {
@@ -62,9 +63,10 @@ namespace Lab1.Controllers
         /// <param>id = ID of course, name = Name of the course, templateID = TemplateID of the course</param>
         /// <returns>BadRequest if the input data is incorrect, else it returns you to the newly created Course</returns>
         [HttpPost]
-        [ResponseType(typeof(Course))]
+        [Route("add")]
         public IHttpActionResult AddCourse(int id, String name, string templateID)
         {
+            Debug.WriteLine("inside add course function");
             var course = new Course { ID = id, Name = name, TemplateID = templateID, StartDate = DateTime.Now, EndDate = DateTime.Now.AddMonths(3) };
             if (course == null)
             {
