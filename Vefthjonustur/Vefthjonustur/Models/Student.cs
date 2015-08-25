@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vefthjonustur.Models
 {
-    class Student
+    public class Student
     {
         public String SSN { get; set; }
         public String Name { get; set; }
