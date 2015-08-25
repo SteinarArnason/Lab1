@@ -13,7 +13,7 @@ namespace Vefthjonustur.Models
     ///   StartDate  = DateTime.Now,
     ///  EndDate    = DateTime.Now.AddMonths(3)
     /// </summary>     
-    class Course
+    public class Course
     {
         public int ID { get; set; }
         public String Name { get; set; }

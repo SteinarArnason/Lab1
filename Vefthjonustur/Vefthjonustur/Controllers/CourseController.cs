@@ -48,14 +48,14 @@ namespace Lab1.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        /*
+        
         [HttpGet]
         [Route("")]
-        public List<Course> GetCourses()
+        public List<Course> getCourses()
         {
             return _courses;
         }
-        */
+        
         /// <summary>
         /// 
         /// </summary>
