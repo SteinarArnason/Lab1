@@ -64,16 +64,15 @@ namespace Lab1.Controllers
         /// <returns>BadRequest if the input data is incorrect, else it returns you to the newly created Course</returns>
         [HttpPost]
         [Route("add")]
-        public IHttpActionResult AddCourse(int id, String name, string templateID)
+        public IHttpActionResult AddCourse(int id, Course c)
         {
             Debug.WriteLine("inside add course function");
-            var course = new Course { ID = id, Name = name, TemplateID = templateID, StartDate = DateTime.Now, EndDate = DateTime.Now.AddMonths(3) };
-            if (course == null)
+            if(c.Name.ToString() == "" || c.TemplateID.ToString() == "")
             {
                 return BadRequest();
             }
-            var location = Url.Link("GetCourse", new { id = course.ID });
-            return Created(location, course);
+            _courses.Add(c);
+            return Ok();
         }
     }
 }
