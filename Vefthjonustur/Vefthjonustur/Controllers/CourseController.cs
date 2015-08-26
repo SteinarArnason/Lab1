@@ -76,14 +76,7 @@ namespace Lab1.Controllers
         [Route("id/{id:int}", Name ="byId")]
         public IHttpActionResult getCourseById(int id)
         {
-            Course ret = null;
-            for(int i = 0; i < _courses.Count; i++)
-            {
-                if(_courses[i].ID == id)
-                {
-                    ret = _courses[i];
-                }
-            }
+            Course ret = _courses.Find(i => i.ID == id);
             if(ret == null)
             {
                 return NotFound();
