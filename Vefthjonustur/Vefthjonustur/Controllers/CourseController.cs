@@ -73,7 +73,7 @@ namespace Lab1.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("id/{id:int}", Name ="byId")]
+        [Route("getCourse/{id:int}", Name ="byId")]
         public IHttpActionResult getCourseById(int id)
         {
             Course ret = _courses.Find(i => i.ID == id);
@@ -121,10 +121,23 @@ namespace Lab1.Controllers
 
         #region Update Course
         [HttpPut]
-        [Route("id/{id:int}/update")]
-        public IHttpActionResult updateCourse()
+        [Route("update/{id:int}")]
+        public IHttpActionResult updateCourse(int id, Course c)
         {
-
+            Course ret = _courses.Find(i => i.ID == id);
+            if(ret == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                ret.Name = c.Name;
+                ret.TemplateID = c.TemplateID;
+                ret.StartDate = c.StartDate;
+                ret.EndDate = c.EndDate;
+                ret.Students = c.Students;
+                return Ok(ret);
+            }
         }
         #endregion
     }
