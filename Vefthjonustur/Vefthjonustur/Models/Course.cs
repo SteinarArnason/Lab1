@@ -20,5 +20,6 @@ namespace Vefthjonustur.Models
         public String TemplateID { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public List<Student> Students { get; set; }
     }
 }

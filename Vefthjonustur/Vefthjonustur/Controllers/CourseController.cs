@@ -65,8 +65,8 @@ namespace Lab1.Controllers
         }
         
         /// <summary>
-        /// Gets course by id
-        /// Example data :
+        ///
+        ///  
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -92,12 +92,18 @@ namespace Lab1.Controllers
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param>id = ID of course, name = Name of the course, templateID = TemplateID of the course</param>
-        /// <returns>BadRequest if the input data is incorrect, else it returns you to the newly created Course</returns>
-        [HttpPost]
+    /// <summary>
+    /// Example : 
+    ///  {
+    ///        "Name":"MyCourse",
+    ///        "TemplateID":"T-testingCourse",
+    ///        "StartDate":"2015-08-17T13:10:20",
+    ///        "EndDate":"2015-12-15T12:13:14"
+    ///  }
+    /// </summary>
+    /// <param>Name = Name of the course, TemplateID = TemplateID of the course</param>
+    /// <returns>BadRequest if the input data is incorrect, else it returns you to the newly created Course</returns>
+    [HttpPost]
         [Route("add")]
         public IHttpActionResult AddCourse(Course c)
         {
