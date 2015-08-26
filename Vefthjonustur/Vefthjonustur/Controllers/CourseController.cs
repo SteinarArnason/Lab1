@@ -118,6 +118,8 @@ namespace Lab1.Controllers
 			return Created(location,c);
 		}
 		#endregion
+		
+		#region Update Course
 		/// <summary>
 		/// Example data 
 		/// {
@@ -130,7 +132,6 @@ namespace Lab1.Controllers
 		/// <param name="id">Id of course that you want to update</param>
 		/// <param name="c"> Course Json object</param>
 		/// <returns>Updated course</returns>
-		#region Update Course
 		[HttpPut]
 		[Route("update/{id:int}")]
 		public IHttpActionResult updateCourse(int id, Course c)
@@ -153,6 +154,11 @@ namespace Lab1.Controllers
 		#endregion
 
 		#region Delete Course
+		/// <summary>
+		/// Deletes the given Course ID
+		/// </summary>
+		/// <param name="id">ID of the course that we want to delete</param>
+		/// <returns></returns>
 		[HttpDelete]
 		[Route("delete/{id:int}")]
 		public IHttpActionResult deleteCourse(int id)
@@ -170,7 +176,14 @@ namespace Lab1.Controllers
 			}
 		}
 		#endregion
+
 		#region add student
+		/// <summary>
+		/// Adds a student to a Course
+		/// </summary>
+		/// <param name="cId">ID of the course we're going to add a student to</param>
+		/// <param name="s">The student we're adding to the course</param>
+		/// <returns>the student just added</returns>
 		[HttpPost]
 		[Route("addStudent/{cId:int}")]
 		public IHttpActionResult addStudent(int cId, Student s)
@@ -195,7 +208,13 @@ namespace Lab1.Controllers
 			}
 		}
 		#endregion
+
 		#region Get Students In Course
+		/// <summary>
+		/// Gets all the student in the selected course
+		/// </summary>
+		/// <param name="ID">The course we want to get students from</param>
+		/// <returns>A list of the students</returns>
 		[HttpGet]
 		[Route("getStudents/{ID:int}")]
 		public IHttpActionResult getStudentsInCourse(int ID)
