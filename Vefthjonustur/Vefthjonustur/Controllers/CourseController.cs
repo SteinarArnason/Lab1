@@ -48,11 +48,11 @@ namespace Lab1.Controllers
         }
         #endregion
 
+        #region Get Courses
         /// <summary>
-        /// 
+        /// Gets all the courses listed
         /// </summary>
         /// <returns></returns>
-        
         [HttpGet]
         [Route("")]
         public IHttpActionResult getCourses()
@@ -63,7 +63,9 @@ namespace Lab1.Controllers
             }
             return Ok(_courses);
         }
-        
+        #endregion
+
+        #region Get Course by ID
         /// <summary>
         ///
         ///  
@@ -91,19 +93,21 @@ namespace Lab1.Controllers
                 return Ok(ret);
             }
         }
+        #endregion
 
-    /// <summary>
-    /// Example : 
-    ///  {
-    ///        "Name":"MyCourse",
-    ///        "TemplateID":"T-testingCourse",
-    ///        "StartDate":"2015-08-17T13:10:20",
-    ///        "EndDate":"2015-12-15T12:13:14"
-    ///  }
-    /// </summary>
-    /// <param>Name = Name of the course, TemplateID = TemplateID of the course</param>
-    /// <returns>BadRequest if the input data is incorrect, else it returns you to the newly created Course</returns>
-    [HttpPost]
+        #region Add Course
+        /// <summary>
+        /// Example : 
+        ///  {
+        ///        "Name":"MyCourse",
+        ///        "TemplateID":"T-testingCourse",
+        ///        "StartDate":"2015-08-17T13:10:20",
+        ///        "EndDate":"2015-12-15T12:13:14"
+        ///  }
+        /// </summary>
+        /// <param name = c></param>
+        /// <returns>BadRequest if the input data is incorrect, else it returns you to the newly created Course</returns>
+        [HttpPost]
         [Route("add")]
         public IHttpActionResult AddCourse(Course c)
         {
@@ -120,5 +124,7 @@ namespace Lab1.Controllers
             string location = Url.Link("byId", new { id = c.ID });
             return Created(location,c);
         }
+        #endregion
+
     }
 }
