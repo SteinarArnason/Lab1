@@ -119,5 +119,13 @@ namespace Lab1.Controllers
         }
         #endregion
 
+        #region Update Course
+        [HttpPut]
+        [Route("id/{id:int}/update")]
+        public IHttpActionResult updateCourse()
+        {
+
+        }
+        #endregion
     }
 }
