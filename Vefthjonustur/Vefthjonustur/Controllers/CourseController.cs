@@ -170,6 +170,47 @@ namespace Lab1.Controllers
 			}
 		}
 		#endregion
+		#region add student
+		[HttpPost]
+		[Route("addStudent/{cId:int}")]
+		public IHttpActionResult addStudent(int cId, Student s)
+		{
+			Course ret = _courses.Find(i => i.ID == cId);
+			if (ret == null)
+			{
+				return NotFound();
+			}
+			else
+			{
+				Student student = ret.Students.Find(i => i.SSN == s.SSN);
+				if(student != null)
+				{
+					return BadRequest();
+				}
+				else
+				{ 
+					ret.Students.Add(s);
+					return Ok(s);
+				}
+			}
+		}
+		#endregion
+		#region Get Students In Course
+		[HttpGet]
+		[Route("getStudents/{ID:int}")]
+		public IHttpActionResult getStudentsInCourse(int ID)
+		{
+			Course ret = _courses.Find(i => i.ID == ID);
+			if (ret == null)
+			{
+				return NotFound();
+			}
+			else
+			{
+				return Ok(ret.Students);
+			}
+		}
+		#endregion
 
 	}
 }
