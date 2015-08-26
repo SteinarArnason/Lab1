@@ -55,9 +55,13 @@ namespace Lab1.Controllers
         
         [HttpGet]
         [Route("")]
-        public List<Course> getCourses()
+        public IHttpActionResult getCourses()
         {
-            return _courses;
+            if(_courses == null)
+            {
+                return NotFound();
+            }
+            return Ok(_courses);
         }
         
         /// <summary>
@@ -68,16 +72,24 @@ namespace Lab1.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("id/{id:int}", Name ="byId")]
-        public Course getCourseById(int id)
+        public IHttpActionResult getCourseById(int id)
         {
+            Course ret = null;
             for(int i = 0; i < _courses.Count; i++)
             {
                 if(_courses[i].ID == id)
                 {
-                    return _courses[i];
+                    ret = _courses[i];
                 }
             }
-            return null;
+            if(ret == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(ret);
+            }
         }
 
         /// <summary>
