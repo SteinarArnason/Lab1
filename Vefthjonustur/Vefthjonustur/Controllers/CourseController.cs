@@ -153,7 +153,22 @@ namespace Lab1.Controllers
 		#endregion
 
 		#region Delete Course
-
+		[HttpDelete]
+		[Route("delete/{id:int}")]
+		public IHttpActionResult deleteCourse(int id)
+		{
+			Course ret = _courses.Find(i => i.ID == id);
+			if (ret == null)
+			{
+				return NotFound();
+			}
+			else
+			{
+				_courses.Remove(ret);
+				//Eigum að skila 204
+				return Ok();
+			}
+		}
 		#endregion
 
 	}
