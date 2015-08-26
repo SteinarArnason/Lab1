@@ -11,17 +11,20 @@ using System.Diagnostics;
 
 namespace Lab1.Controllers
 {
+ 
     [RoutePrefix("api/courses")]
     public class CoursesController : ApiController
     {
         private static List<Course> _courses;
         private static List<Student> _students;
+        private static int ID_counter;
 
         #region Constructor
         public CoursesController()
         {
             if (_courses == null)
             {
+                ID_counter = 3;
                 _courses = new List<Course>
                 {
                     new Course
@@ -58,21 +61,46 @@ namespace Lab1.Controllers
         }
         
         /// <summary>
+        /// Gets course by id
+        /// Example data :
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("id/{id:int}", Name ="byId")]
+        public Course getCourseById(int id)
+        {
+            for(int i = 0; i < _courses.Count; i++)
+            {
+                if(_courses[i].ID == id)
+                {
+                    return _courses[i];
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param>id = ID of course, name = Name of the course, templateID = TemplateID of the course</param>
         /// <returns>BadRequest if the input data is incorrect, else it returns you to the newly created Course</returns>
         [HttpPost]
         [Route("add")]
-        public IHttpActionResult AddCourse(int id, Course c)
+        public IHttpActionResult AddCourse(Course c)
         {
-            Debug.WriteLine("inside add course function");
-            if(c.Name.ToString() == "" || c.TemplateID.ToString() == "")
+            c.ID = ID_counter;
+            Debug.WriteLine(ID_counter);
+            if(c.Name.Length < 1|| c.TemplateID.Length < 1)
             {
+                Debug.WriteLine("Going to send bad request");
                 return BadRequest();
             }
+            Debug.WriteLine("Everything okay");
+            ID_counter++;
             _courses.Add(c);
-            return Ok();
+            string location = Url.Link("byId", new { id = c.ID });
+            return Created(location,c);
         }
     }
 }
