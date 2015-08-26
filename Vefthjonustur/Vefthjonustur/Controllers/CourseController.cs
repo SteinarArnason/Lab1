@@ -102,7 +102,7 @@ namespace Lab1.Controllers
     ///  }
     /// </summary>
     /// <param>Name = Name of the course, TemplateID = TemplateID of the course</param>
-    /// <returns>BadRequest if the input data is incorrect, else it returns you to the newly created Course</returns>
+    /// <returns>BadRequest if the input data is incorrect, else it returns you the newly created Course</returns>
     [HttpPost]
         [Route("add")]
         public IHttpActionResult AddCourse(Course c)
