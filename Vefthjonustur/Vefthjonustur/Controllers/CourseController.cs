@@ -73,11 +73,11 @@ namespace Lab1.Controllers
 		/// <param name="id"></param>
 		/// <returns></returns>
 		[HttpGet]
-		[Route("getCourse/{id:int}", Name ="byId")]
-		public IHttpActionResult getCourseById(int id)
+		[Route("getCourse/{ID:int}", Name ="byId")]
+		public IHttpActionResult getCourseById(int ID)
 		{
-			Course ret = _courses.Find(i => i.ID == id);
-			if(ret == null)
+			Course ret = findCourseById(ID);
+			if (ret == null)
 			{
 				return NotFound();
 			}
@@ -133,11 +133,11 @@ namespace Lab1.Controllers
 		/// <param name="c"> Course Json object</param>
 		/// <returns>Updated course</returns>
 		[HttpPut]
-		[Route("update/{id:int}")]
-		public IHttpActionResult updateCourse(int id, Course c)
+		[Route("update/{ID:int}")]
+		public IHttpActionResult updateCourse(int ID, Course c)
 		{
-			Course ret = _courses.Find(i => i.ID == id);
-			if(ret == null)
+			Course ret = findCourseById(ID);
+			if (ret == null)
 			{
 				return NotFound();
 			}
@@ -163,7 +163,7 @@ namespace Lab1.Controllers
 		[Route("delete/{id:int}")]
 		public IHttpActionResult deleteCourse(int id)
 		{
-			Course ret = _courses.Find(i => i.ID == id);
+			Course ret = findCourseById(id);
 			if (ret == null)
 			{
 				return NotFound();
@@ -188,7 +188,7 @@ namespace Lab1.Controllers
 		[Route("addStudent/{cId:int}")]
 		public IHttpActionResult addStudent(int cId, Student s)
 		{
-			Course ret = _courses.Find(i => i.ID == cId);
+			Course ret = findCourseById(cId);
 			if (ret == null)
 			{
 				return NotFound();
@@ -219,7 +219,7 @@ namespace Lab1.Controllers
 		[Route("getStudents/{ID:int}")]
 		public IHttpActionResult getStudentsInCourse(int ID)
 		{
-			Course ret = _courses.Find(i => i.ID == ID);
+			Course ret = findCourseById(ID);
 			if (ret == null)
 			{
 				return NotFound();
@@ -229,6 +229,13 @@ namespace Lab1.Controllers
 				return Ok(ret.Students);
 			}
 		}
+		#endregion
+		#region Find Course
+		public Course findCourseById(int ID)
+		{
+			return _courses.Find(i => i.ID == ID);
+			
+		} 
 		#endregion
 
 	}
