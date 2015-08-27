@@ -117,19 +117,20 @@ namespace Lab1.Controllers
 			return Created(location,c);
 		}
 		#endregion
-		
+
 		#region Update Course
 		/// <summary>
-		/// Example data 
-		/// {
+		/// Update Course by ID
+		/// </summary>
+		/// <param name="ID">Id of course that you want to update</param>
+		/// <param name="c">
+		///{
 		///"Name":"UpdateCourse",
 		///"TemplateID":"T-xxx-UpdateCourse",
 		///"StartDate":"2000-08-17T13:10:20",
 		///"EndDate":"2000-12-15T12:13:14"
 		///}
-		/// </summary>
-		/// <param name="id">Id of course that you want to update</param>
-		/// <param name="c"> Course Json object</param>
+		/// </param>
 		/// <returns>Updated course</returns>
 		[HttpPut]
 		[Route("update/{ID:int}")]
