@@ -52,7 +52,7 @@ namespace Lab1.Controllers
 		/// <summary>
 		/// Gets all the courses listed
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>All courses</returns>
 		[HttpGet]
 		[Route("")]
 		public IHttpActionResult getCourses()
@@ -67,11 +67,10 @@ namespace Lab1.Controllers
 
 		#region Get Course by ID
 		/// <summary>
-		///
-		///  
+		///  Example request: api/courses/getCourse/1
 		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
+		/// <param name="id">ID of the course you want to get</param>
+		/// <returns>Course that matches the ID param</returns>
 		[HttpGet]
 		[Route("getCourse/{ID:int}", Name ="byId")]
 		public IHttpActionResult getCourseById(int ID)
@@ -158,21 +157,20 @@ namespace Lab1.Controllers
 		/// Deletes the given Course ID
 		/// </summary>
 		/// <param name="id">ID of the course that we want to delete</param>
-		/// <returns></returns>
+		/// <returns>204 if successful or 400 if unsuccesful</returns>
 		[HttpDelete]
 		[Route("delete/{id:int}")]
-		public IHttpActionResult deleteCourse(int id)
+		public void deleteCourse(int id)
 		{
 			Course ret = findCourseById(id);
 			if (ret == null)
 			{
-				return NotFound();
+				//user gets 400 Bad Request
+				throw new HttpResponseException(HttpStatusCode.BadRequest);
 			}
 			else
 			{
 				_courses.Remove(ret);
-				//Eigum að skila 204
-				return Ok();
 			}
 		}
 		#endregion
@@ -230,6 +228,7 @@ namespace Lab1.Controllers
 			}
 		}
 		#endregion
+
 		#region Find Course
 		public Course findCourseById(int ID)
 		{
